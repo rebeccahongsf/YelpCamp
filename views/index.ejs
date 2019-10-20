@@ -19,6 +19,7 @@
             <h3><%= campground["name"] %></h3>
           </div>
           <img class="figure-img img-fluid img-thumbnail" src="<%= campground["image"] %>" alt="<%= campground["name"] %>">
+          <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary btn-sm">More information</a>
         </div>
       </div>
     <% }); %>
