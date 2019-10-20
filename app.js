@@ -4,7 +4,6 @@ var express     = require("express"),
     mongoose    = require("mongoose");
 const PORT = process.env.PORT || 3000;
 
-
 mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extend: true}));
 app.set("view engine", "ejs");
