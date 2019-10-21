@@ -4,7 +4,7 @@ https://rebeccahongsf-yelpcamp.herokuapp.com/
 
 ## RESTful Routes
 
-|   NAME   |     PATH              |    VERB         |            Description               |
+|   NAME   |     PATH              |    VERB         |            DESCRIPTION               |
 |----------|-----------------------|-----------------|--------------------------------------| 
 | Index    | /campgrounds          |      GET        | Displays all campgrounds             |
 | New      | /campgrounds/new      |      GET        | Shows form for new campground entry  |
