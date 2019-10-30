@@ -14,12 +14,12 @@
   <div class="row">
     <% campgrounds.forEach(function (campground){ %>
       <div class="col-md-3 col-sm-6">
-        <div class="figure">
-          <div class="figure-caption">
+        <div class="card">
+          <img class="card-img-top img-fluid" src="<%= campground["image"] %>" alt="<%= campground["name"] %>">
+          <div class="card-body">
             <h3><%= campground["name"] %></h3>
+            <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary btn-sm">More information</a>
           </div>
-          <img class="figure-img img-fluid img-thumbnail" src="<%= campground["image"] %>" alt="<%= campground["name"] %>">
-          <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary btn-sm">More information</a>
         </div>
       </div>
     <% }); %>
