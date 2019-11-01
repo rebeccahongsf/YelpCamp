@@ -12,11 +12,15 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse">
+      <div class="collapse navbar-collapse justify-content-end">
         <div class="navbar-nav nav-right">
-          <a class="nav-item nav-link" href="/">Login</a>
-          <a class="nav-item nav-link" href="/">Signup</a>
-          <a class="nav-item nav-link" href="/">Logout</a>
+          <% if(!currentUser){ %>
+            <a class="nav-item nav-link" href="/login">Login</a>
+            <a class="nav-item nav-link" href="/register">Signup</a>
+          <% } else {%>
+            <a class="nav-item nav-link" href="#">Signed in as <%= currentUser.username %></a>
+            <a class="nav-item nav-link" href="/logout">Logout</a>
+          <% }%>
         </div>
       </div>
     </nav>
