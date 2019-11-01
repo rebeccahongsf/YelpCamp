@@ -9,6 +9,8 @@ var express               = require("express"),
     LocalStrategy         = require("passport-local"),
     passportLocalMongoose = require("passport-local-mongoose"),
     seedDB                = require("./seeds");
+    
+    var commentRoutes = require("./routes/comments");
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
