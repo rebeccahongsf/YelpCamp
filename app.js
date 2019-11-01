@@ -18,16 +18,6 @@ console.log(__dirname);
 app.set("view engine", "ejs");
 seedDB(); // function invokation 
 
-// Heroku wwwhisper 
-var wwwhisper = require('connect-wwwhisper');
-// app holds a reference to express or connect framework, it
-// may be named differently in your source file.
-app.use(wwwhisper());
-
-// Alternatively, if you don't want wwwhisper to insert
-// a logout iframe into HTML responses use.
-app.use(wwwhisper(false));
-
 // Passport Configuration
 app.use(require("express-session")({
   secret: "Rusty is the best and cutest dog in the world",
