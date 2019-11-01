@@ -10,7 +10,7 @@ router.get("/", function(req, res){
 });
 
 // ================
-// Authentication Route
+// Register Route
 // ================
 router.get("/register", function(req, res){
   res.render("register");
@@ -54,9 +54,9 @@ router.get("/logout", function(req, res){
   res.redirect("/campgrounds");
 });
 
-// ============
+// ===================
 // Is Logged In Check
-// ============
+// ===================
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();
@@ -64,4 +64,4 @@ function isLoggedIn(req, res, next){
   res.redirect("/login");
 }
 
-module.export = router;
+module.exports = router;

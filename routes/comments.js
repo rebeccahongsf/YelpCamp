@@ -1,12 +1,12 @@
-var express = require("express");
-var router  = express.Router();
-var Campground = require("../models/campground");
-var Comment = require("../models/comment");
+var express     = require("express");
+var router      = express.Router();
+var Campground  = require("../models/campground");
+var Comment     = require("../models/comment");
 
 // ==============
 // Comment Routes
 // ==============
-router.get("/campgrounds/:id/comments/new", isLoggedIn, function(req, res){
+router.get("/new", isLoggedIn, function(req, res){
   Campground.findById(req.params.id, function(err, campground){
     if(err){
       console.log(err);
@@ -16,7 +16,7 @@ router.get("/campgrounds/:id/comments/new", isLoggedIn, function(req, res){
   })
 });
 
-router.post("/campgrounds/:id/comments", function(req, res){
+router.post("/", function(req, res){
   // look up campgrounds using ID 
   Campground.findById(req.params.id, function(err, campground){
     if(err){
@@ -40,9 +40,9 @@ router.post("/campgrounds/:id/comments", function(req, res){
 });
 
 
-// ============
+// ===================
 // Is Logged In Check
-// ============
+// ===================
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();
@@ -50,4 +50,4 @@ function isLoggedIn(req, res, next){
   res.redirect("/login");
 }
 
-module.export = router;
+module.exports = router;

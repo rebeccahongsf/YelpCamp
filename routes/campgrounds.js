@@ -1,7 +1,7 @@
-var express = require("express");
-var router  = express.Router();
-var Campground = require("../models/campground");
-var Comment = require("../models/comment");
+var express     = require("express");
+var router      = express.Router();
+var Campground  = require("../models/campground");
+var Comment     = require("../models/comment");
 
 // INDEX — Displays all campgrounds
 router.get("/", function(req, res){
@@ -16,7 +16,7 @@ router.get("/", function(req, res){
 });
 
 // NEW — Displays form to add campground
-router.get("/new", function(req, res){
+router.get("/new", isLoggedIn, function(req, res){
   res.render("campgrounds/new");
 }); 
   
@@ -49,4 +49,15 @@ router.get("/:id", function(req, res){
   });
 });
 
-module.export = router;
+
+// ===================
+// Is Logged In Check
+// ===================
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } 
+  res.redirect("/login");
+}
+
+module.exports = router;
