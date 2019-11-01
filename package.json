@@ -10,7 +10,6 @@
   "author": "Rebecca Hong",
   "license": "MIT",
   "dependencies": {
-    "connect-wwwhisper": "*",
     "body-parser": "^1.19.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
