@@ -17,8 +17,9 @@
         <div class="card-body">
           <h4 class="float-right">$9.00/night</h4>
           <h4><a href="#"><%= campground.name %></a></h4>
-          <p>Added by <strong><%= campground.author.username %></strong></p>
+          <p><em>Submited by <strong><%= campground.author.username %></strong></em></p>
           <p><%= campground.description %></p>
+          <a class="btn btn-outline-success" href="/campgrounds/<%= campground._id %>/edit"> Edit</a>
         </div>
       </div>
       <div>
