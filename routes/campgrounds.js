@@ -24,7 +24,7 @@ router.get("/new", isLoggedIn, function(req, res){
 router.post("/", function(req, res){
   var name = req.body.name;
   var image = req.body.image;
-  var desc = req.body.description;
+  var description = req.body.description;
   var newCampground = {name: name, image: image, description: description};
   
   // Create new campground and save to the DB 

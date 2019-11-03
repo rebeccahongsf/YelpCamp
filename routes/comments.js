@@ -1,5 +1,5 @@
 var express     = require("express");
-var router  = express.Router({mergeParams: true});
+var router      = express.Router({mergeParams: true});
 var Campground  = require("../models/campground");
 var Comment     = require("../models/comment");
 
@@ -27,8 +27,15 @@ router.post("/", function(req, res){
         if(err){
           console.log(err);
         } else {
+          // add username and ID to comment
+          comment.author.id = req.user.id;
+          comment.author.username = req.user.username;
+          // save comment
+          comment.save();
+          
           campground.comments.push(comment);
           campground.save();
+          console.log(comment);
           res.redirect("/campgrounds/" + campground._id);
         }
       });
