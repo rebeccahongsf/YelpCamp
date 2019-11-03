@@ -21,7 +21,7 @@ router.get("/new", isLoggedIn, function(req, res){
 }); 
   
 // CREATE — Adds new campground                                                                    
-router.post("/", function(req, res){
+router.post("/", isLoggedIn, function(req, res){
   var name = req.body.name;
   var image = req.body.image;
   var description = req.body.description;
@@ -33,6 +33,9 @@ router.post("/", function(req, res){
       console.log(err);
     } else {
       // Redirect
+      campground.author.id = req.user.id;
+      campground.author.username = req.user.username;
+      campground.save();
       res.redirect("/campgrounds");
     }
   });
