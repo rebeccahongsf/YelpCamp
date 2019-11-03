@@ -17,7 +17,7 @@ var commentRoutes         = require("./routes/comments"),
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
-seedDB(); // function invokation 
+// seedDB(); // function invokation 
 
 app.set("view engine", "ejs");
 

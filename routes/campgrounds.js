@@ -1,5 +1,5 @@
 var express     = require("express");
-var router      = express.Router();
+var router      = express.Router({mergeParams: true});
 var Campground  = require("../models/campground");
 var Comment     = require("../models/comment");
 
@@ -21,9 +21,10 @@ router.get("/new", isLoggedIn, function(req, res){
 }); 
   
 // CREATE — Adds new campground                                                                    
-router.post("/", function(req, res){
+router.post("/", isLoggedIn, function(req, res){
   var name = req.body.name;
   var image = req.body.image;
+  var description = req.body.description;
   var newCampground = {name: name, image: image, description: description};
   
   // Create new campground and save to the DB 
@@ -32,6 +33,9 @@ router.post("/", function(req, res){
       console.log(err);
     } else {
       // Redirect
+      campground.author.id = req.user.id;
+      campground.author.username = req.user.username;
+      campground.save();
       res.redirect("/campgrounds");
     }
   });
