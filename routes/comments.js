@@ -13,7 +13,7 @@ router.get("/new", isLoggedIn, function(req, res){
     } else {
       res.render("comments/new", {campground: campground});
     }
-  })
+  });
 });
 
 router.post("/", function(req, res){
@@ -41,11 +41,23 @@ router.post("/", function(req, res){
       });
     }
   })
-  // create new comment
-  // connect new comment to campgrounds
-  // redirect to campground show page
 });
 
+// Edit comment
+router.get("/:comment_id/edit", function(req, res){
+  Campground.findById(req.params.id, function(err, campground){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("comments/edit", {campground: campground});
+    }
+  });
+});
+
+// Update
+// router.put("/", function(req, res){
+// 
+// });
 
 // ===================
 // Is Logged In Check
