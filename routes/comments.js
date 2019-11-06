@@ -10,7 +10,8 @@ var middleware  = require("../middleware");
 router.get("/new", middleware.isLoggedIn, function(req, res){
   Campground.findById(req.params.id, function(err, campground){
     if(err){
-      console.log(err);
+      req.flash("error", "Something went wrong...");
+      res.redirect("back");
     } else {
       res.render("comments/new", {campground: campground});
     }
@@ -21,12 +22,12 @@ router.post("/", function(req, res){
   // look up campgrounds using ID 
   Campground.findById(req.params.id, function(err, campground){
     if(err){
-      console.log(err);
+      req.flash("error", "Something went wrong...");
       res.redirect("/campgrounds");
     } else {
       Comment.create(req.body.comment, function(err, comment){
         if(err){
-          console.log(err);
+          req.flash("error", "Something went wrong...");
         } else {
           // add username and ID to comment
           comment.author.id = req.user.id;
@@ -37,6 +38,7 @@ router.post("/", function(req, res){
           campground.comments.push(comment);
           campground.save();
           console.log(comment);
+          req.flash("success", "Successfully added comment.");
           res.redirect("/campgrounds/" + campground._id);
         }
       });
@@ -48,7 +50,7 @@ router.post("/", function(req, res){
 router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
   Comment.findById(req.params.comment_id, function(err, foundComment){
     if(err){
-      console.log(err);
+      req.flash("error", "You do not have permissions to edit this comment.");
     } else {
       res.render("comments/edit", {campground_id: req.params.id, comment: foundComment} );
     }
@@ -59,9 +61,10 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
 router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
     if(err){
-      console.log(err);
+      req.flash("error", "Something went wrong...");
       res.redirect("back");
     } else {
+      req.flash("success", "Successfully updated comment!");
       res.redirect("/campgrounds/" + req.params.id);
     }
   })
@@ -71,9 +74,10 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
 router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, res){
   Comment.findByIdAndRemove(req.params.comment_id, function(err){
     if(err){
-      console.log(err);
+      req.flash("error", "You do not have permissions to delete this comment.");
       res.redirect("back");
     } else {
+      req.flash("success", "Successfully deleted comment!");
       res.redirect("/campgrounds/" + req.params.id );
     }
   });

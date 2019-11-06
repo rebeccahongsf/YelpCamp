@@ -57,7 +57,12 @@ router.get("/:id", function(req, res){
 // EDIT
 router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
   Campground.findById(req.params.id, function(err, foundCampground){
-    res.render("campgrounds/edit", {campground: foundCampground});
+    if(err) {
+      req.flash("error", "Campgorund does not exist!");
+      res.redirect("back");
+    } else {
+      res.render("campgrounds/edit", {campground: foundCampground});
+    }
   });
 });
 
@@ -67,9 +72,10 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
   var data = {name: req.body.name, image: req.body.image, description: req.body.description};
   Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCampground){
     if(err){
-      console.log(err);
+      req.flash("error", "You do not have permission to do that!");
       res.redirect("/campgrounds/:id");
     } else {
+      req.flash("success", "Campground has been updated!");
       res.redirect("/campgrounds/" + req.params.id);
     }
   });
@@ -79,9 +85,10 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
 router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res){
   Campground.findByIdAndRemove(req.params.id, function(err){
     if(err){
-      console.log(err);
+      req.flash("error", "You do not have permission to do that!");
       res.redirect("/campgrounds");
     } else {
+      req.flash("success", "Campground has been deleted!");
       res.redirect("/campgrounds");
     }
   });
