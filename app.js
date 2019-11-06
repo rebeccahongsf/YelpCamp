@@ -3,6 +3,7 @@ var express               = require("express"),
     bodyParser            = require("body-parser"),
     passport              = require("passport"),
     mongoose              = require("mongoose"),
+    flash                 = require("connect-flash"),
     methodOverride        = require("method-override"),
     Campground            = require("./models/campground"),
     Comment               = require("./models/comment"),
@@ -24,7 +25,7 @@ app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extend: true}));
 app.use(express.static(__dirname + "/public"));
-
+app.use(flash());
 
 // Passport Configuration
 app.use(require("express-session")({
