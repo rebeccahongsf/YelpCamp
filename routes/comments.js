@@ -74,7 +74,6 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
 router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, res){
   Comment.findByIdAndRemove(req.params.comment_id, function(err){
     if(err){
-      req.flash("error", "You do not have permissions to delete this comment.");
       res.redirect("back");
     } else {
       req.flash("success", "Successfully deleted comment!");
