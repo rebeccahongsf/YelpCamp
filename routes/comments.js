@@ -48,12 +48,18 @@ router.post("/", function(req, res){
 
 // Edit Comment
 router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
-  Comment.findById(req.params.comment_id, function(err, foundComment){
-    if(err){
-      req.flash("error", "You do not have permissions to edit this comment.");
-    } else {
-      res.render("comments/edit", {campground_id: req.params.id, comment: foundComment} );
+  Campground.findById(req.params.id, function(err, foundCampground){
+    if(err || !foundCampground){
+      req.flash("error", "Campground not found.");
+      return res.redirect("back");
     }
+    Comment.findById(req.params.comment_id, function(err, foundComment){
+      if(err){
+        req.flash("error", "You do not have permissions to edit this comment.");
+      } else {
+        res.render("comments/edit", {campground_id: req.params.id, comment: foundComment} );
+      }
+    });
   });
 });
 
