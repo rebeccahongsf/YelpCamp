@@ -18,7 +18,16 @@ var commentRoutes         = require("./routes/comments"),
     
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
+// mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://yelpcamp:2019yelpcamp@rehongcluster-053wx.mongodb.net/test?retryWrites=true&w=majority",{ 
+  useNewUrlParser: true,
+  useCreateIndex: true 
+}).then(() => {
+  console.log("Connected to the DB!");
+}).catch(err => {
+  console.log("Error: " + err.message);
+});
+
 // seedDB(); // function invokation 
 
 app.set("view engine", "ejs");
