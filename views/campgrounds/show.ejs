@@ -15,7 +15,7 @@
       <div class="card">
         <img  class="card-img-top img-fluid" src="<%= campground.image %>" alt="<%= campground.name %>" />
         <div class="card-body">
-          <h4 class="float-right">$9.00/night</h4>
+          <h4 class="float-right">$<%= campground.price %>/night</h4>
           <h4><a href="#"><%= campground.name %></a></h4>
           <p><em>Submited by <strong><%= campground.author.username %></strong></em></p>
           <p><%= campground.description %></p>

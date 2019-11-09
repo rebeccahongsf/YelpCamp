@@ -11,6 +11,7 @@ var campgroundSchema = new mongoose.Schema({
     unique: true
   },
   image: String,
+  price: String,
   description: String,
   author: {
     id: {
