@@ -2,7 +2,14 @@ var mongoose = require("mongoose");
 
 // Schema Setup
 var campgroundSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: "Campground name cannot be blank."
+  },
+  slug: {
+    type: String,
+    unique: true
+  },
   image: String,
   description: String,
   author: {
