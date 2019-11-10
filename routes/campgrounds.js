@@ -35,7 +35,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
   // Create new campground and save to the DB 
   Campground.create(newCampground, function(err, newlyCreated){
     if(err){
-      req.flash("error", "Something went wrong...");
+      req.flash("error", err.message);
       res.redirect("back");
     } else {
       // Redirect
