@@ -6,14 +6,14 @@ var middleware  = require("../middleware");
 
 // INDEX — Displays all campgrounds
 router.get("/", function(req, res){
-  // Get all campgrounds from DB 
-  Campground.find({}, function(err, allCampgrounds){
-    if(err){
-      req.flash("error", "Something went wrong...");
-    } else {
-      res.render("campgrounds/index", {campgrounds: allCampgrounds});
-    }
-  });
+    // Get all campgrounds from DB
+    Campground.find({}, function(err, allCampgrounds){
+       if(err){
+           console.log(err);
+       } else {
+          res.render("campgrounds/index",{campgrounds: allCampgrounds, page: 'campgrounds'});
+       }
+    });
 });
 
 // NEW — Displays form to add campground

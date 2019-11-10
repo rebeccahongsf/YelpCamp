@@ -13,7 +13,7 @@ var express               = require("express"),
     seedDB                = require("./seeds");
     
 var commentRoutes         = require("./routes/comments"),
-    campgroundRoutes     = require("./routes/campgrounds"),
+    campgroundRoutes      = require("./routes/campgrounds"),
     indexRoutes           = require("./routes/index");
     
 const PORT = process.env.PORT || 3000;
