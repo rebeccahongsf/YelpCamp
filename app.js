@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 3000;
 
 // mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
 mongoose.connect(process.env.DATABASEURL);
+
 // seedDB(); // function invokation 
 
 app.set("view engine", "ejs");
