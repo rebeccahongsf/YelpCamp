@@ -19,10 +19,10 @@ var commentRoutes         = require("./routes/comments"),
 const PORT = process.env.PORT || 3000;
 
 // Local Testing 
-// mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/yelp_camp", { useNewUrlParser: true });
 
 // Deploy to Heroku DB
-mongoose.connect(process.env.DATABASEURL);
+// mongoose.connect(process.env.DATABASEURL);
 
 // Invokation for seedDB
 // seedDB(); 

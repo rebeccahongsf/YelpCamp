@@ -6,6 +6,17 @@ var middleware  = require("../middleware");
 
 // INDEX — Displays all campgrounds
 router.get("/", function(req, res){
+  if(req.query.search){
+    // Search all campgrounds from DB
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    Campground.find({"name": regex}, function(err, foundCampground){
+       if(err){
+           console.log(err);
+       } else {
+          res.render("campgrounds/index",{campgrounds: foundCampground, page: 'campgrounds'});
+       }
+    });
+  } else {
     // Get all campgrounds from DB
     Campground.find({}, function(err, allCampgrounds){
        if(err){
@@ -14,6 +25,7 @@ router.get("/", function(req, res){
           res.render("campgrounds/index",{campgrounds: allCampgrounds, page: 'campgrounds'});
        }
     });
+  }
 });
 
 // NEW — Displays form to add campground
@@ -95,5 +107,9 @@ router.delete("/:id",  middleware.isLoggedIn, middleware.checkCampgroundOwnershi
     }
   });
 })
+
+function escapeRegex(text){
+  return text.replace(/[-[\]{}()*+?.,\\^$!#\s]/g, "\\$&");
+}
 
 module.exports = router;
